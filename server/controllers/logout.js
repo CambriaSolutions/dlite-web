@@ -5,7 +5,7 @@ const logout = (req, res) => {
   req.logout();
   req.session.destroy();
   if (!appName) {
-    res.redirect('/');
+    res.redirect('/apply');
   }
   res.redirect(`/apply/${appName}/sign-in`);
 };
