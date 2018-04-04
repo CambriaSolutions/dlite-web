@@ -45,12 +45,6 @@ select {
   background-position: calc(100% - 10px) center;
 }
 
-select::-ms-expand {
-	border: 0;
-  text-indent: -9999px;
-  background: transparent url("/images/icons/misc/dropdown.svg");
-}
-
 .scroll-wrapper {
   height: 375px;
   display: flex;
