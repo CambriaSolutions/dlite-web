@@ -31,7 +31,8 @@ module.exports = function parseUserData(records){
       name,
       cardAction,
       cardType,
-      id
+      id,
+      pathname
     });
 
   });

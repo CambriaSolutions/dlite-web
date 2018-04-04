@@ -328,6 +328,8 @@ describe('getApplication by user id', function() {
     it('returns the application base record', function(done) {
       getApplication.byUserId(data.application.user_id)
       .then((records) => {
+        console.log('records')
+        //console.log(records)
         assert.equal(records.applications[0].id, data.application.id);
         assert.equal(records.applications[0].first_name, data.application.first_name);
         assert.equal(records.applications[0].middle_name, data.application.middle_name);

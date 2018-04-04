@@ -205,6 +205,12 @@ function saveApplication(data) {
       if(records.length > 0) {
         returnedData.voting_registrations = records;
       }
+      return insertOneToOne('ui', data.ui, application_id);
+    })
+    .then((records) => {
+      if(records.length > 0) {
+        returnedData.ui = records;
+      }
       return insertCards(data.cards, application_id);
     })
     .then((records) => {

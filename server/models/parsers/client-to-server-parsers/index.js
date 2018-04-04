@@ -14,6 +14,7 @@ const votingRegistrations = require('./extract-voting-registrations');
 const cardTypes           = require('./extract-cards');
 const cardOptions         = require('./extract-card-options');
 const licenseClasses      = require('./extract-license-classes');
+const ui                  = require('./extract-ui');
 
 module.exports = {
   application,
@@ -29,5 +30,6 @@ module.exports = {
   votingRegistrations,
   cardTypes,
   cardOptions,
-  licenseClasses
+  licenseClasses,
+  ui
 };

@@ -6,19 +6,24 @@ const CDLObject             = require('./server-to-client-parsers/cdl');
 const IDDLObject            = require('./server-to-client-parsers/iddl');
 
 function parse(data) {
-
+  let appObject = {};
   if (cardTypeParser.isCDLDatabase(data)){
     if (!data) {
-      return defaultClientState.CDL;
+      appObject = defaultClientState.CDL;
     }
-    return CDLObject(data);
+    else {
+      appObject = CDLObject(data);
+    }
   }
   else {
     if(!data) {
-      return defaultClientState.IDDL;
+      appObject = defaultClientState.IDDL;
     }
-    return IDDLObject(data);
+    else {
+      appObject = IDDLObject(data);
+    }
   }
+  return appObject;
 }
 
 module.exports = parse;

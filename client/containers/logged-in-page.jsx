@@ -1,13 +1,8 @@
 'use strict';
-import { nextPath }               from '../helpers/navigation/page';
-import connectForm                from '../helpers/connect-form';
-import { getUserData }            from '../actions/get-user-data';
+import { connect }                from 'react-redux';
+import handlers                   from '../helpers/handlers';
 import AutoLogout                 from '../helpers/handlers/auto-logout';
-import {
-  getAppKey,
-  signInURL,
-  splitPathname
-} from '../helpers/data/pathnames';
+
 import {
   buildLoggedIn,
   getAppNameCookie,
@@ -15,8 +10,7 @@ import {
 
 const LoggedIn = (props) => {
   let appName = getAppNameCookie();
-  let pageKey = getAppKey(appName);
-  let user = props.match.params.user;
+
   // set isLoggedIn key for localhost
   if (APP_ENV === 'development' || APP_ENV === 'test') {
     buildLoggedIn();
@@ -25,26 +19,41 @@ const LoggedIn = (props) => {
   // begin timer to log out after inactivity
   new AutoLogout(history, appName);
 
+  let user = props.match.params.user;
+  props.onLoggedIn(user, history, appName);
+
+
   // make api call to /api/user/:id and save result to redux
-  props.dispatch(getUserData(user))
-  .then((res) => {
-    props.loadTranslationFromCookie();
+  // props.dispatch(getUserData(user))
+  // .then((res) => {
+  //   props.loadTranslationFromCookie();
 
-    if (res === 'user-fail') {
-      console.log('error: failed to retrieve records')
-      return history.push(signInURL(appName));
-    }
+  //   if (res === 'user-fail') {
+  //     console.log('error: failed to retrieve records')
+  //     return history.push(signInURL(appName));
+  //   }
 
-    // include placeholder flow prop
-    let pathURL = nextPath(pageKey, {
-      flow: '',
-      userData: res
-    });
-    return history.push(pathURL);
-  });
+  //   // include placeholder flow prop
+  //   let pathURL = nextPath(pageKey, {
+  //     flow: '',
+  //     userData: res
+  //   });
+  //   return history.push(pathURL);
+  // });
 
   return null;
 };
 
+const mapStateToProps = (state) => {
+  return {};
+};
 
-export default connectForm(null, null, LoggedIn);
+const mapDispatchToProps = (dispatch) => {
+  const onLoggedIn    = handlers.onLoggedIn(dispatch);
+  return {
+    onLoggedIn
+  }
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoggedIn);

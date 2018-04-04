@@ -12,7 +12,7 @@ import {
 
 const Page = (props) => {
   let sectionKey = getTextFromState(props, props.sectionKey, '');
-  props.onPageLoad(sectionKey, props.section);
+  props.onPageLoad(sectionKey, props.section, props.location.pathname, props.savedPath);
 
   // determine which app (cdl or IDDL they are on) from chooseApp else pathname
   let appName = getAppType(props);
@@ -31,7 +31,8 @@ const mapStateToProps = (state) => {
     chooseApp:            state.ui.chooseApp,
     section:              state.ui.section,
     language:             state.ui.language,
-    translationLanguage:  state.server.translations.translationLanguage
+    translationLanguage:  state.server.translations.translationLanguage,
+    savedPath:            state.pathname
   };
 }
 

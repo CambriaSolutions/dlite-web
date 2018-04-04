@@ -59,7 +59,8 @@ exports.byUserId = (userID) => {
   let records = {
     applications: [],
     cards: [],
-    card_options: []
+    card_options: [],
+    ui: []
   };
 
   return db('applications').where('user_id', userID)
@@ -82,16 +83,24 @@ exports.byUserId = (userID) => {
           return cardIDs;
         })
         .then((cardIDs) => {
-          return db('card_options').whereIn('card_id', cardIDs)
-            .then((options) => {
-              records.card_options = options;
+
+          return Promise.all([
+            db('card_options').whereIn('card_id', cardIDs)
+              .then((options) => { records.card_options = options; }),
+            db('ui').whereIn('application_id', appIDs)
+            .then((uis) => {
+
+              uis.forEach((ui) => {
+                records.ui.push(ui.pathname);
+              });
               return records;
-            });
-        });
+            })
+          ])
+        })
     })
 
   .then((res) => {
-    return res;
+    return res[1];
   })
   .catch((err) => {
     console.log('GET APPLICATIONS BY USER ID ERROR', err);
