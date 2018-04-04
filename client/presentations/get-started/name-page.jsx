@@ -60,10 +60,10 @@ const LegalNameForm = (props) => {
             value         = { props.legalName.lastName }
             errorMessage  = { props.validations.lastName() }
           >
-            <Translator tag = 'span' translationPath = 'shared.labels.lastName' />
+            <Translator tag='span' translationPath='shared.labels.lastName' />
           </TextInput>
 
-          <SelectDropdown
+          <SuffixSelector
             name          = 'suffix'
             id            = 'suffix'
             selected      = { props.legalName.suffix }
@@ -71,9 +71,7 @@ const LegalNameForm = (props) => {
             onChange      = { props.onSelectChange }
             changeAction  = { props.changeAction }
             values        = { suffixList }
-          >
-            <Translator tag = 'span' translationPath = 'intro.namePage.suffixLabel' />
-          </SelectDropdown>
+          />
         </fieldset>
 
         <NavigationButtons
