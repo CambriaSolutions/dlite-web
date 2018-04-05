@@ -1,16 +1,16 @@
 'use strict';
 
-module.exports = function sameUserOnly(req, res, next) {
+module.exports = function sameUserOnly(req, res, next, env = process.env.APP_ENV) {
   let isTheSame;
-  if (process.env.APP_ENV === 'development' || process.env.APP_ENV === 'test') {
+  if (env === 'development' || env === 'test') {
     isTheSame = true;
   } else {
     isTheSame = req.params.uuid === req.session.user.uuid;
   }
   if (isTheSame) {
-    return next();
+    next();
   }
   else {
-    return res.status(500).json('session user uuid doesnt match requested uuid');
+    res.status(500).json({message: 'session user uuid doesnt match requested uuid'});
   }
 };
