@@ -10,15 +10,8 @@ import NavigationButtons  from '../navigation-buttons.jsx';
 import Translator         from '../../i18n/translator-tag.jsx';
 import TranslatorList     from '../../i18n/translator-list.jsx';
 
-const suffixList = [
-  "Sr.",
-  "Jr.",
-  "I",
-  "II",
-  "III"
-];
-
 const LegalNameForm = (props) => {
+
   return (
     <Page
       sectionKey='intro'
@@ -63,15 +56,12 @@ const LegalNameForm = (props) => {
             <Translator tag='span' translationPath='shared.labels.lastName' />
           </TextInput>
 
-          <label className='row' htmlFor='suffix'><Translator tag='span' translationPath='intro.namePage.suffixLabel' /></label>
+          <label className='row' id='suffix' htmlFor='suffix'><Translator tag='span' translationPath='intro.namePage.suffixLabel' /></label>
           <SuffixSelector
             name          = 'suffix'
             id            = 'suffix'
-            selected      = { props.legalName.suffix }
-            hover         = { props.hover }
-            onChange      = { props.onSelectChange }
-            changeAction  = { props.changeAction }
-            values        = { suffixList }
+            value         = {props.legalName.suffix}
+            onChange      = {props.onChange}
           />
         </fieldset>
 

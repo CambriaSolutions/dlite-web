@@ -26,7 +26,7 @@ const SuffixSelector = (props) => {
 
   return (
     <div className='select-input-block'>
-      <select name={ props.identifier } id={id} value={value} onChange={props.onChange} >
+      <select name={ props.name } id={props.id} value={value} onChange={props.onChange} >
         { options }
       </select>
     </div>
