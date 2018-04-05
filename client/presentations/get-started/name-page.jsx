@@ -63,6 +63,7 @@ const LegalNameForm = (props) => {
             <Translator tag='span' translationPath='shared.labels.lastName' />
           </TextInput>
 
+          <label className='row' htmlFor='suffix'><Translator tag='span' translationPath='intro.namePage.suffixLabel' /></label>
           <SuffixSelector
             name          = 'suffix'
             id            = 'suffix'
@@ -72,7 +73,6 @@ const LegalNameForm = (props) => {
             changeAction  = { props.changeAction }
             values        = { suffixList }
           />
-          <label className='row' htmlFor='suffix'><Translator tag='span' translationPath='intro.namePage.suffixLabel' /></label>
         </fieldset>
 
         <NavigationButtons
