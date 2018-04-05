@@ -4,6 +4,7 @@ const router            = require('express').Router();
 const controllers       = require('./controllers');
 
 
+
 const routes = (passport) => {
   router.get( '/api/application/:id',         controllers.checkAuth,
                                               controllers.getApplication);
@@ -21,13 +22,11 @@ const routes = (passport) => {
   router.get( '/auth/new/:appName/:language', (req, res, next) => {
     passport.authenticate('local', function(err, user, info) {
       if (user === false) {
-        console.log('>>>>>Local auth failed!<<<<<');
+        console.log('Local auth failed!');
         res.redirect('/apply/log-out');
       }
       else {
-        console.log('***********************')
-        console.log(req.user);
-        console.log('***********************')
+        req.user = { id: 3, uuid: '086925c5ae774015b40720cf8e50410o' };
         req.session.user = req.user;
         if (process.env.APP_URL === 'development' && !process.env.APP_URL.match(/herokuapp/g)) {
           res.redirect(`http://localhost:3000/apply/logged-in/${req.user.uuid}`);

@@ -22,7 +22,7 @@ const findOrSaveUser    = require('./server/models/db/save-user');
 
 let server = express();
 
-server.use(cookieParser(sessionOptions.secret));
+server.use(cookieParser());
 server.use(bodyParser.json());
 server.use(session(sessionOptions));
 server.use(passport.initialize());
@@ -35,14 +35,15 @@ passport.use(new LocalStrategy(
     passwordField: 'password'
   },
   function(email, password, done) {
-    done(null, { id: 3, uuid: '086925c5ae774015b40720cf8e50410d' });
+    let user = { id: 3, uuid: '086925c5ae774015b40720cf8e50410d' }
+    done(null, JSON.stringify(user));
   }
 ));
 
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-csrf(server);
+//csrf(server);
 
 server.use(logging());
 server.use(helmet());
