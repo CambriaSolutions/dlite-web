@@ -24,6 +24,8 @@ const routes = (passport) => {
 
   router.get( '/auth/error',              controllers.authError);
 
+  router.get( '/field-office-route/:appName/:language',       controllers.fieldOfficeRoute);
+
   router.get( '/apply/log-out',           controllers.checkAuth,
                                           controllers.logout);
 
