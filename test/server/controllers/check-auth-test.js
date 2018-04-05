@@ -51,9 +51,6 @@ describe('check auth controller', () => {
     req.session = {};
     controller(req, res, next, 'production');
     assert.ok(!next.called);
-<<<<<<< HEAD
-  })
-=======
   });
 
   describe('#dev env', function() {
@@ -63,5 +60,4 @@ describe('check auth controller', () => {
       assert.ok(next.called);
     });
   });
->>>>>>> removed isLoggedIn key
 });
