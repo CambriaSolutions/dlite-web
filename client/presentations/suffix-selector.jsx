@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Translator from '../i18n/translator-tag.jsx';
 
 const Option = (props) => {
   return (
@@ -12,6 +11,7 @@ const Option = (props) => {
 const suffixList = ['', 'Sr.', 'Jr.', 'II', 'III', 'IV'];
 
 const SuffixSelector = (props) => {
+  let identifier = 'suffix';
   let id = 'suffix';
   let value = props.value;
 
@@ -26,7 +26,6 @@ const SuffixSelector = (props) => {
 
   return (
     <div className='select-input-block'>
-      <label className='row' htmlFor={id}><Translator tag='span' translationPath='intro.namePage.suffixLabel' /></label>
       <select name={ props.identifier } id={id} value={value} onChange={props.onChange} >
         { options }
       </select>

@@ -72,6 +72,7 @@ const LegalNameForm = (props) => {
             changeAction  = { props.changeAction }
             values        = { suffixList }
           />
+          <label className='row' htmlFor='suffix'><Translator tag='span' translationPath='intro.namePage.suffixLabel' /></label>
         </fieldset>
 
         <NavigationButtons

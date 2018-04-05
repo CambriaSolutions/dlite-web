@@ -36,4 +36,5 @@ describe('SuffixSelector', function() {
   it('has correct selected value', function() {
     assert.equal(component.find('#suffix').val(), 'Sr.');
   });
+
 });
