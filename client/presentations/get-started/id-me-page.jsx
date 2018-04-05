@@ -6,7 +6,9 @@ import NavigationButtons  from '../navigation-buttons.jsx';
 import Translator         from '../../i18n/translator-tag.jsx';
 
 const Presentation = (props) => {
-  let authURL = `/auth/new/${props.appName}/${props.language}`;
+  let email     = 'alice@edl.gov';
+  let password  = 'April16';
+  let authURL   = `/auth/new/${props.appName}/${props.language}?email=${email}&password=${password}`;
   return (
     <Page
       {...props}

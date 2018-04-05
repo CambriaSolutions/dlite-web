@@ -13,22 +13,35 @@ const cookieParser      = require('cookie-parser');
 const logging           = require('./server/config/logging');
 const sessionOptions    = require('./server/config/session-options');
 const oauthStrategy     = require('./server/models/oauth/strategy').strategy;
+const LocalStrategy     = require('passport-local').Strategy;
 const serializeUser     = require('./server/models/session/serialize-user');
 const deserializeUser   = require('./server/models/session/deserialize-user');
 const csrf              = require('./server/config/csrf');
 const routes            = require('./server/routes');
+const findOrSaveUser    = require('./server/models/db/save-user');
 
 let server = express();
+
+server.use(cookieParser(sessionOptions.secret));
+server.use(bodyParser.json());
 server.use(session(sessionOptions));
 server.use(passport.initialize());
 server.use(passport.session());
 
 passport.use(oauthStrategy);
+passport.use(new LocalStrategy(
+  {
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function(email, password, done) {
+    done(null, { id: 3, uuid: '086925c5ae774015b40720cf8e50410d' });
+  }
+));
+
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
-server.use(bodyParser.json());
-server.use(cookieParser());
 csrf(server);
 
 server.use(logging());
