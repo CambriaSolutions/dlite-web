@@ -38,7 +38,7 @@ const getErrorMessage = (err) => {
   return message;
 };
 
-const getTranslation = function (locale, fetcher) {
+const getTranslation = function (locale, fetcher = fetch) {
   return function (dispatch) {
     dispatch(updateApiStatus('loading'));
     return fetchTranslation(locale, fetcher)
