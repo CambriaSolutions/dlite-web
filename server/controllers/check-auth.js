@@ -4,6 +4,8 @@ module.exports = function checkAuth(req, res, next) {
 
   // check headers here
   let isLoggedIn;
+  console.log('check auth');
+  console.log(req.session);
 
   if (process.env.APP_ENV === 'development' || process.env.APP_ENV === 'test') {
     isLoggedIn = true;

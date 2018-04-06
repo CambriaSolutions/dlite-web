@@ -90,7 +90,4 @@ describe('Get User Apps controller', () => {
     .then(() => { done(); })
     .catch(done);
   });
-
-  it('returns error ')
-
 });

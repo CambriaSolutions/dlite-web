@@ -9,16 +9,28 @@ describe('Auth related controllers', () => {
   let req, res, next, passport, authNew, authSuccess;
 
   beforeEach(function() {
-    req = {session: {user: {uuid: 'foo'}, cookie: {}}, user: { uuid: '100'}, params: {appName: 'cdl', language: 'vi'} , query: { state: JSON.stringify({appName: 'cdl', language: 'vi'} )}};
+    req = {
+      session: {
+        user: {
+          uuid: 'foo',
+        },
+        cookie: {},
+        save: sinon.spy()
+      },
+      user: { uuid: '100'},
+      params: {appName: 'cdl', language: 'vi'} ,
+      query: { state: JSON.stringify({appName: 'cdl', language: 'vi'} )}
+    };
     res = httpMocks.createResponse({});
     passport = { authenticate: sinon.spy() };
     res.redirect = sinon.spy();
     res.cookie = sinon.spy();
+    next = sinon.spy();
   });
 
   it('#authSuccess redirects to the logged in page', function() {
-    controllers.authSuccess(req, res);
-    assert(res.redirect.calledWith('/apply/logged-in/'+ req.user.uuid));
+    controllers.authSuccess(req, res, next, 'production');
+    assert.ok(req.session.save.called);
   });
 
   it('#authSuccess sets language cookie to req.query.state.language', function() {
