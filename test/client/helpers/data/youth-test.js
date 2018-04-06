@@ -8,6 +8,8 @@ import {
   checkPreReg,
   continueHidden,
   under16GuardianSignature,
+  requireGuardianSignatureUnder18,
+  requireGuardianSignatureUnder16,
   isNewDriver,
   needsKnowledgeTest,
   guardianSigned,
@@ -147,6 +149,47 @@ describe('Data helpers for youth', function() {
       assert.equal(under16GuardianSignature(data), false);
     });
   });
+
+  describe('#requireGuardianSignatureUnder18', function() {
+    it('returns true if user is under 18 and getting a DL', function() {
+      data.dateOfBirth.year = (year - 17).toString();
+      data.DLApp = { isApplying : true };
+      assert.equal(requireGuardianSignatureUnder18(data), true);
+    });
+    it('returns true if user is under 18 and getting a DL and ID', function() {
+      data.dateOfBirth.year = (year - 17).toString();
+      data.DLApp = { isApplying : true };
+      data.IDApp = { isApplying: true };
+      assert.equal(requireGuardianSignatureUnder18(data), true);
+    });
+    it('returns false if user is under 18 and getting an ID', function() {
+      data.dateOfBirth.year = (year - 17).toString();
+      data.DLApp = { isApplying : false };
+      data.IDApp = { isApplying: true };
+      assert.equal(requireGuardianSignatureUnder18(data), false);
+    });
+  });
+
+  describe('#requireGuardianSignatureUnder16', function() {
+    it('returns true if user is under 16 and getting a DL', function() {
+      data.dateOfBirth.year = (year - 14).toString();
+      data.DLApp = { isApplying : true };
+      assert.equal(requireGuardianSignatureUnder16(data), true);
+    });
+    it('returns true if user is under 16 and getting a DL and ID', function() {
+      data.dateOfBirth.year = (year - 15).toString();
+      data.DLApp = { isApplying : true };
+      data.IDApp = { isApplying: true };
+      assert.equal(requireGuardianSignatureUnder16(data), true);
+    });
+    it('returns false if user is under 16 and getting an ID', function() {
+      data.dateOfBirth.year = (year - 14).toString();
+      data.DLApp = { isApplying : false };
+      data.IDApp = { isApplying: true };
+      assert.equal(requireGuardianSignatureUnder16(data), false);
+    });
+  });
+
   describe('#isNewDriver', function() {
     it('returns true when user is 16', function() {
       data.dateOfBirth.year = (year - 16).toString();

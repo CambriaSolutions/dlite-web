@@ -9,14 +9,18 @@ import {
 } from '../../../../../client/helpers/navigation/id-dl/voter-registration/next-path';
 
 const today = new Date();
-const isPrereg = (today.getFullYear() - 17).toString();
+
 
 describe('Data helpers for determining next path from current page and props in voter-registration section', function() {
   let data;
+  const isPrereg = (today.getFullYear() - 17).toString();
   beforeEach(function() {
     data = {
       optOut: '',
       citizenStatus: '',
+      DLApp: {
+        isApplying: true
+      },
       eligibilityRequirements: '',
       dateOfBirth: {
         year: (today.getFullYear() - 40).toString(),
@@ -46,6 +50,11 @@ describe('Data helpers for determining next path from current page and props in 
         data.dateOfBirth.year = isPrereg;
         assert.equal(citizenship(data), 'guardianSignature');
       });
+      it('returns "summary" if user is not eligible for citizenship and is preregistering for an ID', function() {
+        data.dateOfBirth.year = isPrereg;
+        data.DLApp.isApplying = false;
+        assert.equal(citizenship(data), 'summary');
+      });
     });
 
     describe('##votingEligibility', function() {
@@ -65,6 +74,11 @@ describe('Data helpers for determining next path from current page and props in 
         data.dateOfBirth.year = isPrereg;
         assert.equal(votingEligibility(data), 'guardianSignature');
       });
+      it('returns "summary" if user is not eligible for voting and is preregistering for an ID', function() {
+        data.dateOfBirth.year = isPrereg;
+        data.DLApp.isApplying = false;
+        assert.equal(votingEligibility(data), 'summary');
+      });
     });
 
     describe('##optOut', function() {
@@ -79,9 +93,14 @@ describe('Data helpers for determining next path from current page and props in 
         data.optOut = 'existing';
         assert.equal(optOut(data), 'voterPreferencesUpdated');
       });
-      it('returns "guardianSignature" if user is preregistering', function() {
+      it('returns "guardianSignature" if user is preregistering and getting a DL', function() {
         data.dateOfBirth.year = isPrereg;
         assert.equal(optOut(data), 'guardianSignature');
+      });
+      it('returns "summary" if user is preregistering and not getting a DL', function() {
+        data.dateOfBirth.year = isPrereg;
+        data.DLApp.isApplying = false;
+        assert.equal(optOut(data), 'summary');
       });
     });
   });
