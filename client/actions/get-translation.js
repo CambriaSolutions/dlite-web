@@ -31,7 +31,7 @@ const getErrorMessage = (err) => {
     error = JSON.parse(err);
     message = error.message;
   } catch(e) {
-    console.log(e);
+    console.debug(e);
     message = 'Something went wrong';
   }
 

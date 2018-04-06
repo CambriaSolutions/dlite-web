@@ -10,19 +10,35 @@ module.exports = function getUserApps(req, res){
   .then(() => {
     return fetchApplication.byUserId(req.params.uuid)
     .then((records) => {
-      console.log('got records for uuid: ');
-      let userData = parseUserData(records);
-      userData.userID = req.params.uuid;
+      let userData;
+
+      if (records.applications.length > 0) {
+        console.debug('got records for uuid ' + records);
+        userData = parseUserData(records);
+        userData.userID = req.params.uuid;
+      }
+      else {
+        userData = {
+          appsLength: 0,
+          userID: req.params.uuid,
+          apps: [{
+            name: '',
+            cardType: [],
+            cardAction: [],
+            id: ''
+          }]
+        };
+      }
       return userData;
-    })
+    });
   })
   .then((userData) => {
-    console.log('preparing to send user data');
+    console.debug('preparing to send user data: ' + userData);
     res.json(userData);
   })
   .catch((err) => {
-    console.log('error from server');
-    console.log(err);
+    console.debug('error from server');
+    console.debug(err);
     res.status(err.statusCode || 500).json(err);
   });
 

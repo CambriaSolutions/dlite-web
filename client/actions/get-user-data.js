@@ -9,19 +9,15 @@ import { getAppKey }        from '../helpers/data/pathnames';
 import {
   updateUserData,
   updateLoggedIn,
-  chooseApp
+  chooseApp,
+  updateApiStatus
 } from './index';
 
-export const getUserData = (uuid, history) => {
-  return function(dispatch) {
-    dispatch({
-      type: 'UPDATE_API_STATUS',
-      payload: {
-        name: 'apiStatus',
-        value: 'loading'
-      }
-    });
-    return fetch('/api/user/' + uuid, {
+export const getUserData = (uuid, history, fetcher = fetch, appName = getAppNameCookie()) => {
+  return (dispatch) => {
+    dispatch(updateApiStatus('loading'));
+
+    return fetcher('/api/user/' + uuid, {
       method: 'GET',
       credentials: 'same-origin',
       headers: {
@@ -30,6 +26,7 @@ export const getUserData = (uuid, history) => {
       }
     })
       .then(res => {
+        console.debug('response from server');
         if(res.status === 200) {
           return res.json();
         }
@@ -38,20 +35,15 @@ export const getUserData = (uuid, history) => {
         }
       })
       .then(data => {
+        console.debug('success. save data');
         dispatch(updateUserData(data));
+        dispatch(updateApiStatus('success'));
 
-        dispatch({
-          type: 'UPDATE_API_STATUS',
-          payload: {
-            name: 'apiStatus',
-            value: 'success'
-          }
-        });
         return data;
       })
       .catch((err) => {
-        console.log('ERROR');
-        console.log(err);
+        console.debug('ERROR');
+        console.debug(err);
 
         dispatch({
           type: 'GET_DATA_ERROR',
@@ -60,27 +52,24 @@ export const getUserData = (uuid, history) => {
             error: err.message
           }
         });
-        dispatch({
-          type: 'UPDATE_API_STATUS',
-          payload: {
-            name: 'apiStatus',
-            value: 'error'
-          }
-        });
+
+        dispatch(updateApiStatus('error'));
+
         let userData = {
           appsLength: 0,
           userID: uuid,
           apps: [{
             name: '',
             cardType: [],
-            cardAction: []
+            cardAction: [],
+            id: ''
           }]
         };
         dispatch(updateUserData(userData));
         return userData;
       })
       .then((userData) => {
-        let appName = getAppNameCookie();
+        // after we fix server error, return this chunk to above the catch
         dispatch(chooseApp(appName));
         dispatch(updateLoggedIn(true));
 
