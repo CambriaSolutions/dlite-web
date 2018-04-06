@@ -18,12 +18,14 @@ import LoggedIn                               from './intro/logged-in-page.jsx';
 import Disclaimers                            from './iddl/get-started/disclaimers-page.jsx';
 import CDLDisclaimers                         from './cdl/cdl-disclaimers.jsx';
 import PrivateRoute                           from './private-route.jsx';
+import OpenFileTST                            from './open-file-tst.jsx';
 
 class Router extends React.Component {
 
   render() {
     return (
       <Switch className='routes'>
+        <Route path={ alicePath('/tst/open-file') }                         exact component={OpenFileTST} />
         <Route path={ alicePath('/links') }                                 exact component={Home} />
         <Route path={ alicePath('/')}                                       exact component={ChooseLanguage} />
         <Route path={ alicePath('/choose-language')}                              component={ChooseLanguage} />

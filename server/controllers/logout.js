@@ -5,6 +5,11 @@ const logout = (req, res) => {
   console.log('going to redirect to sign in for: ' + appName);
   req.logout();
   req.session.destroy();
+
+  if(process.env.TST_ENV) {
+    res.redirect('/apply/tst/open-file');
+  }
+
   if (!appName || appName.length < 1) {
     res.redirect('/apply/choose-language');
   } else {
