@@ -4,12 +4,16 @@ const logout = (req, res) => {
   console.log('LOGOUT')
   let appName = req.cookies.appName;
   req.logout();
-  req.session.destroy();
+  let redirectURL = `/apply/${appName}/sign-in`;
   if (!appName || appName.length < 1) {
-    res.redirect('/apply/choose-language');
-  } else {
-    res.redirect(`/apply/${appName}/sign-in`);
+    redirectURL = '/apply/choose-language'
   }
+  req.session.destroy((err) => {
+    if (err) {
+      console.debug(err);
+    }
+    res.redirect(redirectURL)
+  });
 };
 
 module.exports = logout;
