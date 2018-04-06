@@ -29,6 +29,7 @@ const CDLType             = require('./get-cdl-type');
 const DLInfo              = require('./get-dl-info');
 const cardType            = require('./get-card-type');
 const cardAction          = require('./get-card-action');
+const guardianSignature   = require('./get-guardian-signature');
 
 module.exports = {
   language,
@@ -59,5 +60,6 @@ module.exports = {
   CDLType,
   DLInfo,
   cardType,
-  cardAction
+  cardAction,
+  guardianSignature
 };

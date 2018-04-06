@@ -27,6 +27,8 @@ exports.byId = (id) => {
       .then((records) => { aggregate.veterans_info = records[0]; }),
     db('voting_registrations').where('application_id', id)
       .then((records) => { aggregate.voting_registrations = records[0]; }),
+    db('guardian_signature').where('application_id', id)
+      .then((records) => { aggregate.guardian_signature = records[0]; }),
     db('cards').where('application_id', id)
       .then((records) => {
         aggregate.cards = records;

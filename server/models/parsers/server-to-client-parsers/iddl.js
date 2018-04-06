@@ -17,6 +17,7 @@ function IDDL(data) {
   let card_options          = data.card_options;
   let license_classes       = data.license_classes;
   let other_state_licenses  = data.other_state_licenses;
+  let guardian_signature    = data.guardian_signature;
 
   let DLApp                 = get.DLApp(cards, card_options, card_histories, license_classes);
   let IDApp                 = get.IDApp(cards, card_options, card_histories);
@@ -61,7 +62,8 @@ function IDDL(data) {
           politicalPartyChoose:     get.party(voting_registrations),
           optOut:                   get.optedOut(voting_registrations),
           contactMethods:           get.contactMethods(emails, phone_numbers, voting_registrations)
-        }
+        },
+        guardianSignature:          get.guardianSignature(guardian_signature)
       }
     }
   );

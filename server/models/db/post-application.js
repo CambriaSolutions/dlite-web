@@ -205,6 +205,12 @@ function saveApplication(data) {
       if(records.length > 0) {
         returnedData.voting_registrations = records;
       }
+      return insertOneToOne('guardian_signature', data.guardian_signature, application_id);
+    })
+    .then((records) => {
+        if(records.length > 0) {
+          returnedData.guardian_signature = records;
+        }
       return insertCards(data.cards, application_id);
     })
     .then((records) => {

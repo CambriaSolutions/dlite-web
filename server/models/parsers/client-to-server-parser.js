@@ -18,7 +18,8 @@ function parse(data) {
     { voting_registrations:   extract.votingRegistrations(data) },
     { cards:                  extract.cardTypes(data) },
     { card_options:           extract.cardOptions(data) },
-    { license_classes:        extract.licenseClasses(data) }
+    { license_classes:        extract.licenseClasses(data) },
+    { guardian_signature:     extract.guardianSignature(data) }
   );
 
   return parsedData;
