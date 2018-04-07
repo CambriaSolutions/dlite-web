@@ -37,7 +37,6 @@ if(!redisUrl) {
   };
 }
 else {
-  console.log(redisUrl);
   config = {
     client: redisClient,
     url: redisUrl,
@@ -46,9 +45,6 @@ else {
     logErrors: true
   };
 }
-
-console.log('config file for redis store: ');
-console.log(config)
 
 //module.exports = config;
 
