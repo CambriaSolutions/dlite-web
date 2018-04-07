@@ -1,8 +1,6 @@
 'use strict';
 
 module.exports = function checkAuth(req, res, next) {
-
-  // check headers here
   let isLoggedIn;
 
   if (process.env.APP_ENV === 'development' || process.env.APP_ENV === 'test') {
@@ -11,6 +9,7 @@ module.exports = function checkAuth(req, res, next) {
     isLoggedIn = req.session.hasOwnProperty('user') && req.session.user.uuid.length > 0;
   }
   console.log('is logged in? ' + isLoggedIn);
+  console.log(req.session);
 
   if (isLoggedIn) {
     next();

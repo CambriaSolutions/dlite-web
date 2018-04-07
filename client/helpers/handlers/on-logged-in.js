@@ -20,7 +20,8 @@ import {
 
 export default (dispatch) => {
   return (uuid, history) => {
-
+    console.log('logged in for uuid: ' + uuid);
+    
     let cookieLanguage = getLanguageFromCookie();
     dispatch(updateLanguage('language', cookieLanguage))
     if (!doNotNeedToLoadTranslations(cookieLanguage)) {
