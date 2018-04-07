@@ -12,7 +12,6 @@ redisClient.on('error', (err) => {
   console.log('error connecting to redis');
 });
 
-
 let fileConfig;
 try {
   fileConfig = require('./server/config/redis.json')[env];
