@@ -42,12 +42,14 @@ server.get('/', (req, res) => {
 });
 server.use('/', expressStaticGzip('public'));
 server.use(express.static('public'));
-server.use((req, res, next) => {
-  console.log('look at the session')
-  console.log(req.url)
-  console.log(req.session);
-  next();
-});
+
+
+// server.use((req, res, next) => {
+//   console.log('look at the session')
+//   console.log(req.url)
+//   console.log(req.session);
+//   next();
+// });
 
 server.port = env.port;
 server.environment = env.env;
