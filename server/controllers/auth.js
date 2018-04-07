@@ -21,8 +21,6 @@ const authCallback = (passport) => {
 const authSuccess = (req, res, next, env = process.env.APP_ENV) => {
   let params = JSON.parse(req.query.state);
   req.session.user = req.user;
-  console.log('*************SUCCESS**************************');
-  console.log(req.session)
 
   res.cookie('appName', params.appName, {maxAge: 1200000});
   res.cookie('language', params.language, {maxAge: 1200000});

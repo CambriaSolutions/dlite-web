@@ -43,11 +43,10 @@ server.get('/', (req, res) => {
 server.use('/', expressStaticGzip('public'));
 server.use(express.static('public'));
 
-
 // server.use((req, res, next) => {
-//   console.log('look at the session')
-//   console.log(req.url)
-//   console.log(req.session);
+//   if (!req.session) {
+//     return next(new Error('session does not exist'));
+//   }
 //   next();
 // });
 

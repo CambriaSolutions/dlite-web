@@ -2,9 +2,7 @@
 
 const env           = require('./server/config/env').env;
 const redisUrl      = process.env.REDIS_URL;
-//const redisUrl      = 'redis://h:p28a021023e30599f0c8313c7a718f5df2da5118cd3b5fac5fa56d1c849bc020f@ec2-35-174-134-181.compute-1.amazonaws.com:16639'
 const redisClient   = require('redis').createClient(redisUrl);
-
 
 redisClient.on('connect', (err) => {
   console.log('connected to redis successfully');
@@ -25,6 +23,7 @@ try {
     );
   }
 }
+
 let config;
 
 if(!redisUrl) {
@@ -46,6 +45,4 @@ else {
   };
 }
 
-//module.exports = config;
-
-module.exports = {client: redisClient}
+module.exports = config;
