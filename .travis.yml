@@ -4,6 +4,7 @@ services:
   - docker
   
 before_install:
+  - chmod +x docker/postgres/*postgres docker/redis/*redis docker/alice/*alice
   - docker network create --driver bridge dev-alice
   - docker/postgres/buildpostgres 
   - docker/redis/buildredis
