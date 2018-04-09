@@ -1,0 +1,1 @@
+docker run -itd -p 6379:6379 --net dev-alice --hostname aliceredis --name aliceredis aliceredis:latest

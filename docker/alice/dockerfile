@@ -1,0 +1,23 @@
+FROM node:9.6.1
+
+# set working directory
+WORKDIR /usr/src/app
+
+# set environment
+ENV APP_ENV production
+ENV APP_URL https://ec2-54-183-179-70.us-west-1.compute.amazonaws.com
+ENV EXPRESS_SESSION_SECRET anyrandomvaluewillwork
+ENV ID_ME_URL https://api.id.me
+ENV OAUTH2_CLIENT_ID 89eb430ccdef62e1071ec9e209095735
+ENV OAUTH2_CLIENT_SECRET 2855655dbd26387c56160bb3e20c00e8
+ENV DATABASE_URL postgres://pguser:pguser@devpostgres:5432/pguser
+ENV REDIS_URL redis://aliceredis:6379/1
+
+# clone alice
+RUN git clone -b master https://github.com/stateofca/dlite-web.git .
+
+# install app dependencies
+RUN npm install --quiet
+RUN node_modules/webpack/bin/webpack.js -p --config webpack.config.prod.js
+
+CMD npm start
