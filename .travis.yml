@@ -12,18 +12,18 @@ before_install:
   - cd $TRAVIS_BUILD_DIR/docker/alice && ./buildalice && ./runalice
   
 script:
-  - docker ps -a
-  - docker network inspect dev-alice
   - docker exec -it alice node_modules/knex/bin/cli.js migrate:latest
   - docker exec -it alice npm run test:coverage
+#  - npm install -g codeclimate-test-reporter
+#  - codeclimate-test-reporter < coverage/lcov.info
   
-# after_success:
-#   - npm install -g codeclimate-test-reporter
-#   - codeclimate-test-reporter < coverage/lcov.info
-# services:
-#   - postgresql
-#   - redis-server
-# before_script:
-#   - export TZ=America/Los_Angeles
-#   - psql -c 'create database travis_ci_test;' -U postgres
-#   - psql -c "CREATE USER ci_tester WITH PASSWORD 'pa33word';" -U postgres
+after_success:
+   - docker tag alice cambria/alice
+   
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
+#   - 
+
