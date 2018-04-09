@@ -1,1 +1,1 @@
-docker run -itd -p 5432:5432 --net dev-alice --hostname devpostgres --name devpostgres devpostgres:latest
+docker run -itd -p 5433:5432 --net dev-alice --hostname devpostgres --name devpostgres devpostgres:latest
