@@ -1,6 +1,7 @@
 'use strict';
 
-module.exports = function checkAuth(req, res, next, env = process.env.APP_ENV) {
+module.exports = function isUserLoggedIn(req, res, next, env = process.env.APP_ENV) {
+
   let isLoggedIn;
 
   if (env === 'development' || env === 'test') {
@@ -10,8 +11,8 @@ module.exports = function checkAuth(req, res, next, env = process.env.APP_ENV) {
   }
 
   if (isLoggedIn) {
-    next();
+    res.json({ status: true });
   } else {
-    res.status(401).json({message: 'not logged in'});
+    res.json({ status: false });
   }
 };

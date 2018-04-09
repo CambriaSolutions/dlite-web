@@ -8,7 +8,9 @@ public/*.css*
 
 debug.png
 
+server/config/redis.json
 server/config/database.json
+server/config/redis.json
 public/index.html
 public/index.dev.html
 public/index.stage.html
