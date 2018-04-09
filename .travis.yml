@@ -13,7 +13,7 @@ before_install:
   
 script:
   - docker exec -it alice node_modules/knex/bin/cli.js migrate:latest
-  - docker exec -it npm run test:coverage
+  - docker exec -it alice npm run test:coverage
   
 # after_success:
 #   - npm install -g codeclimate-test-reporter
