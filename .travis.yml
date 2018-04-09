@@ -6,14 +6,14 @@ services:
 before_install:
   - chmod +x docker/postgres/*postgres docker/redis/*redis docker/alice/*alice
   - docker network create --driver bridge dev-alice
-  - ./docker/postgres/buildpostgres 
-  - ./docker/redis/buildredis
-  - ./docker/alice/buildalice
+  - cd $HOME/docker/postgres && ./buildpostgres 
+  - cd $HOME/docker/redis && ./buildredis
+  - cd $HOME/docker/alice && ./buildalice
   
 script:
-  - ./docker/postgres/runpostgres
-  - ./docker/redis/runredis
-  - ./docker/alice/runalice
+  - cd $HOME/docker/postgres && ./runpostgres
+  - cd $HOME/docker/redis && ./runredis
+  - cd $HOME/docker/alice && ./runalice
 
 # script:
 #   - node_modules/knex/bin/cli.js migrate:latest
