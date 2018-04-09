@@ -8,6 +8,8 @@ before_install:
   - docker/postgres/buildpostgres 
   - docker/redis/buildredis
   - docker/alice/buildalice
+  
+script:
   - docker/postgres/runpostgres
   - docker/redis/runredis
   - docker/alice/runalice
