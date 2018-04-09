@@ -18,7 +18,9 @@ script:
 #  - codeclimate-test-reporter < coverage/lcov.info
   
 after_success:
-   - docker tag alice cambria/alice
+   - docker tag alice:latest cambria/alice:latest
+   - docker tag devpostgres:latest cambria/devpostgres:latest
+   - docker tag aliceredis:latest cambria/aliceredis:latest
    
 deploy:
   provider: script
