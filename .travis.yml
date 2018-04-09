@@ -11,10 +11,10 @@ before_install:
   - cd $TRAVIS_BUILD_DIR/docker/redis && ./buildredis && ./runredis
   - cd $TRAVIS_BUILD_DIR/docker/alice && ./buildalice && ./runalice
   
-# script:
-# script:
-#   - node_modules/knex/bin/cli.js migrate:latest
-#   - npm run test:coverage
+script:
+  - docker exec -it alice node_modules/knex/bin/cli.js migrate:latest
+  - docker exec -it npm run test:coverage
+  
 # after_success:
 #   - npm install -g codeclimate-test-reporter
 #   - codeclimate-test-reporter < coverage/lcov.info
