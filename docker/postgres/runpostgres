@@ -1,2 +1,1 @@
-# Changed default port of 5432 to 5433 
-docker run -itd -p 5433:5433 --net dev-alice --hostname devpostgres --name devpostgres devpostgres:latest
+docker run -itd -p 5433:5432 --net dev-alice --hostname devpostgres --name devpostgres devpostgres:latest
