@@ -22,10 +22,10 @@ after_success:
    - docker tag devpostgres:latest cambria/devpostgres:latest
    - docker tag aliceredis:latest cambria/aliceredis:latest
    
-deploy:
-  provider: script
-  script: bash docker/docker_push
-  on:
-    branch: master
+# deploy:
+#  provider: script
+#  script: bash docker/docker_push
+#  on:
+#    branch: master
 #   - 
 
