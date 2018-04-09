@@ -10,7 +10,7 @@ ENV EXPRESS_SESSION_SECRET anyrandomvaluewillwork
 ENV ID_ME_URL https://api.idmelabs.com
 ENV OAUTH2_CLIENT_ID 723dc11aa9223caf74d288d074d7230c
 ENV OAUTH2_CLIENT_SECRET 56a301c3824e90b248865c66ba9c6b54
-ENV DATABASE_URL postgresql://ci_tester:pa33word@devpostgres:5433/travis_ci_test
+ENV DATABASE_URL postgresql://ci_tester:pa33word@devpostgres:5432/travis_ci_test
 ENV REDIS_URL redis://aliceredis:6379/1
 
 # clone alice
