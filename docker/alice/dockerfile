@@ -4,13 +4,13 @@ FROM node:9.6.1
 WORKDIR /usr/src/app
 
 # set environment
-ENV APP_ENV production
+ENV APP_ENV test
 ENV APP_URL https://ec2-54-183-179-70.us-west-1.compute.amazonaws.com
 ENV EXPRESS_SESSION_SECRET anyrandomvaluewillwork
-ENV ID_ME_URL https://api.id.me
-ENV OAUTH2_CLIENT_ID 89eb430ccdef62e1071ec9e209095735
-ENV OAUTH2_CLIENT_SECRET 2855655dbd26387c56160bb3e20c00e8
-ENV DATABASE_URL postgres://pguser:pguser@devpostgres:5432/pguser
+ENV ID_ME_URL https://api.idmelabs.com
+ENV OAUTH2_CLIENT_ID 723dc11aa9223caf74d288d074d7230c
+ENV OAUTH2_CLIENT_SECRET 56a301c3824e90b248865c66ba9c6b54
+ENV DATABASE_URL postgresql://ci_tester:pa33word@devpostgres:5432/travis_ci_test
 ENV REDIS_URL redis://aliceredis:6379/1
 
 # clone alice
