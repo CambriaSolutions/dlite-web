@@ -22,11 +22,15 @@ after_success:
 #   - docker tag alice:latest cambria/alice:latest
    - docker tag devpostgres:latest cambria/devpostgres:latest
 #   - docker tag aliceredis:latest cambria/aliceredis:latest
+   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+#   - docker push cambria/alice
+   - docker push cambria/devpostgres
+#   - docker push cambria/aliceredis 
    
-deploy:
-  provider: script
-  script: bash $TRAVIS_BUILD_DIR/docker/push/docker_push
-  on:
-    branch: master
+#deploy:
+#  provider: script
+#  script: bash $TRAVIS_BUILD_DIR/docker/push/docker_push
+#  on:
+#    branch: master
 #   - 
 
