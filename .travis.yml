@@ -23,9 +23,9 @@ after_success:
    - docker tag devpostgres:latest cambria/devpostgres:latest
    - docker tag aliceredis:latest cambria/aliceredis:latest
    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-   - docker push cambria/alice
-   - docker push cambria/devpostgres
-   - docker push cambria/aliceredis 
+   - docker push cambria/alice >/dev/null
+   - docker push cambria/devpostgres >/dev/null
+   - docker push cambria/aliceredis >/deb/null
    
 #deploy:
 #  provider: script
