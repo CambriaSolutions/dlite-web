@@ -12,6 +12,7 @@ before_install:
   - cd $TRAVIS_BUILD_DIR/docker/alice && ./buildalice && ./runalice
   
 script:
+  - echo Go
 #  - docker exec -it alice node_modules/knex/bin/cli.js migrate:latest
 #  - docker exec -it alice npm run test:coverage
 #  - npm install -g codeclimate-test-reporter
