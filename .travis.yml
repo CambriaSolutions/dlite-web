@@ -15,7 +15,8 @@ script:
   - docker exec -it alice node_modules/knex/bin/cli.js migrate:latest
   - docker exec -it alice npm run test:coverage
   - npm install -g codeclimate-test-reporter
-  - codeclimate-test-reporter < coverage/lcov.info
+# where is lcov.info created
+#  - codeclimate-test-reporter < coverage/lcov.info
   
 after_success:
    - docker tag alice:latest cambria/alice:latest
