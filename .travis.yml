@@ -8,8 +8,8 @@ before_install:
   - chmod +x docker/postgres/*postgres docker/redis/*redis docker/alice/*alice
   - docker network create --driver bridge dev-alice
   - cd $TRAVIS_BUILD_DIR/docker/postgres && ./buildpostgres && ./runpostgres
-  - cd $TRAVIS_BUILD_DIR/docker/redis && ./buildredis && ./runredis
-  - cd $TRAVIS_BUILD_DIR/docker/alice && ./buildalice && ./runalice
+#  - cd $TRAVIS_BUILD_DIR/docker/redis && ./buildredis && ./runredis
+#  - cd $TRAVIS_BUILD_DIR/docker/alice && ./buildalice && ./runalice
   
 script:
   - echo Go
@@ -19,13 +19,13 @@ script:
 #  - codeclimate-test-reporter < coverage/lcov.info
   
 after_success:
-   - docker tag alice:latest cambria/alice:latest
+#   - docker tag alice:latest cambria/alice:latest
    - docker tag devpostgres:latest cambria/devpostgres:latest
-   - docker tag aliceredis:latest cambria/aliceredis:latest
+#   - docker tag aliceredis:latest cambria/aliceredis:latest
    
 deploy:
   provider: script
-  script: bash docker/docker_push
+  script: bash $TRAVIS_BUILD_DIR/docker/docker_push
   on:
     branch: master
 #   - 
