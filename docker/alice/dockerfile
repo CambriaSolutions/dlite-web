@@ -14,7 +14,7 @@ ENV DATABASE_URL postgresql://ci_tester:pa33word@devpostgres:5432/travis_ci_test
 ENV REDIS_URL redis://aliceredis:6379/1
 
 # clone alice
-RUN git clone -b master https://github.com/stateofca/dlite-web.git .
+RUN git clone -b master https://github.com/CambriaSolutions/dlite-web.git .
 
 # install app dependencies
 RUN npm install --quiet
