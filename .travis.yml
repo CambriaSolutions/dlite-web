@@ -27,4 +27,4 @@ after_success:
    - docker push cambria/devpostgres >/dev/null
    - docker push cambria/aliceredis >/dev/null
    - openssl aes-256-cbc -K $encrypted_5097dcc55a0b_key -iv $encrypted_5097dcc55a0b_iv -in $TRAVIS_BUILD_DIR/deploy_alice.enc -out /tmp/deploy_alice -d
-   - ssh -q -i /tmp/deploy_alice $DEPLOY_USER@$DEPLOY_TARGET 'bash -s' < $TRAVIS_BUILD_DIR/docker/scripts/deploy.sh
+   - ssh -o "StrictHostKeyChecking no" -i /tmp/deploy_alice $DEPLOY_USER@$DEPLOY_TARGET 'bash -s' < $TRAVIS_BUILD_DIR/docker/scripts/deploy.sh
