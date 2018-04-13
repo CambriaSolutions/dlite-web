@@ -7,6 +7,6 @@ docker pull cambria/alice:latest
 docker tag cambria/devpostgres:latest devpostgres:latest
 docker tag cambria/aliceredis:latest aliceredis:latest
 docker tag cambria/alice:latest alice:latest
-cd $HOME/docker/postgres && ./stoppostgres && ./runpostgres
-cd $HOME/docker/redis && ./stopredis && ./runredis
-cd $HOME/docker/alice && ./stopalice && ./runalice
+cd $HOME/dlite-web/docker/postgres && ./stoppostgres && ./runpostgres
+cd $HOME/dlite-web/docker/redis && ./stopredis && ./runredis
+cd $HOME/dlite-web/docker/alice && ./stopalice && ./runalice
